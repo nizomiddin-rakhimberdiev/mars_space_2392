@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello {{ request.user.username }}</h1>
+
+<a href="{% url 'create-post' %}">Blog yaratish</a>
+
+<div>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <div style="border: 1px solid gray; border-radius: 20px">
+                    <h2>{{ post.user.first_name }}</h2>
+                    <p>{{ post.created_at }}</p>
+                    <h3>{{ post.title }}</h3>
+                    <img width="250" src="{{ post.image.url }}" alt="">
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
