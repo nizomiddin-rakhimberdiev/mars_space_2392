@@ -36,6 +36,7 @@ class Teacher(CustomUser):
 
 class Course(models.Model):
     name = models.CharField(max_length=50)
+    modules = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(24)])
 
     def __str__(self):
         return self.name

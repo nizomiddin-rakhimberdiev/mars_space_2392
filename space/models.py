@@ -1,6 +1,7 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 import random
-from users.models import Student
+from users.models import Student, Course
 
 CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 def generate_code():
@@ -73,4 +74,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Lesson(models.Model):
+    name = models.CharField(max_length=255)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
+    module = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(course.modules)])
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
